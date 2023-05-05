@@ -1,0 +1,2919 @@
+1   java.nio.ByteBuffer.get
+---------------example1---------------
+public String toString() {
+        //......
+        ByteBuffer bb = content.duplicate();
+        bb.rewind();
+        byte[] b = new byte[bb.limit()];
+        bb.get(b);
+        //......
+        return \"UnknownEntry{\" +\"content=\" + Hex.encodeHex(b) +\'}\';
+    }
+2   javax.swing.StringTokenizer.nextToken
+---------------example1---------------
+private Content getTypeColumn(FieldDoc member) {
+    ......
+    StringTokenizer mods = new StringTokenizer(member.modifiers());
+    while(mods.hasMoreTokens()) {
+        Content modifier = new StringContent(mods.nextToken());
+        code.addContent(modifier);
+        code.addContent(getSpace());
+    }
+    ......
+    return tdType;
+}
+3   java.lang.String.Scanner.nextLine
+---------------example1---------------
+protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        //...
+        StringBuilder sb = new StringBuilder();
+        try (Scanner scanner = new Scanner(req.getInputStream(), \"UTF-8\")) {
+            while (scanner.hasNextLine()) {
+                sb.append(scanner.nextLine());
+            }
+        }
+        this.listener.processRequest(sb.toString(), req.getRequestURI(), req.getMethod(), null);
+        //...
+    }
+4   ApplicationInfo.loadIcon
+---------------example1---------------
+public static View initSnippetForInstalledApp(Activity pContext,
+            ApplicationInfo appInfo, View snippetView) {
+        final PackageManager pm = pContext.getPackageManager();
+        return initSnippet(
+                snippetView,
+                appInfo.loadLabel(pm),
+                appInfo.loadIcon(pm));
+    }
+
+---------------example2---------------
+public Drawable getApkIcon(String path){      
+		PackageManager pm = mcontext.getPackageManager();      
+		PackageInfo info = pm.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);      
+		if(info != null){      
+			return appInfo.loadIcon(pm);
+		}   		
+		return null;
+	}
+
+---------------example3---------------
+protected Void doInBackground(Void... params) {
+			PackageManager pm = me.getPackageManager();
+			List<ApplicationInfo> appinfos = pm.getInstalledApplications(0);
+			for (int x=0; x < appinfos.size(); x++){             
+				item.icon = appInfo.loadIcon(pm);
+				item.name = appInfo.loadLabel(pm).toString();
+			}
+			return null;
+		}
+
+---------------example4---------------
+private void Initialize(ApplicationInfo appInfo, Context context) {
+		PackageManager pm = context.getPackageManager();
+		mDrawable = appInfo.loadIcon(pm);
+		mListApplicationName.add(getApplicationName(appInfo, pm));
+		try {
+			mVersion = pm.getPackageInfo(appInfo.packageName, 0).versionName;
+		} catch (NameNotFoundException ex) {
+			mInstalled = false;
+		} catch (Throwable ex) {
+			mInstalled = false;
+			XUtil.bug(null, ex);
+		}
+	}
+
+---------------example5---------------
+ public static Drawable getApkIcon(Context context, String apkPath) {
+        PackageManager pm = context.getPackageManager();
+        PackageInfo info = pm.getPackageArchiveInfo(apkPath,
+                PackageManager.GET_ACTIVITIES);
+        if (info != null) {
+            try {
+                return appInfo.loadIcon(pm);
+            } catch (OutOfMemoryError e) {
+                Log.e(LOG_TAG, e.toString());
+            }
+        }
+        return null;
+    }\n
+5   BufferedReader.readLine
+---------------example1---------------
+public Object run() {
+            try {
+                if (ver > 5.10f) {
+                    InputStreamReader isr
+                        = new InputStreamReader(fis, \"ISO-8859-1\");
+                    BufferedReader br = new BufferedReader(isr);
+                    String line = br.readLine();
+                }
+            } catch (Exception e) {
+            }
+        return null;
+    }
+
+---------------example2---------------
+public void run() {
+    try {
+        InputStreamReader isReader = new InputStreamReader(inputStream);
+        BufferedReader bufReader = new BufferedReader(isReader);
+
+        while(true) {
+            String line = bufReader.readLine();
+        }
+    } catch(IOException ex) {
+    }
+}
+
+---------------example3---------------
+ private void getInstallPath() throws Exception
+  {
+    InputStreamReader inReader = new InputStreamReader(in);
+    BufferedReader reader = new BufferedReader(inReader);
+    installPath = reader.readLine();
+    reader.close();
+  }
+
+---------------example4---------------
+static public String readLine(String prompt) {
+        try {
+            InputStreamReader converter = new InputStreamReader(System.in);
+            BufferedReader in = new BufferedReader(converter);
+
+            return in.readLine();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+---------------example5---------------
+public static String getString() {
+	  try{
+		InputStreamReader rd = new InputStreamReader(System.in);
+		BufferedReader bfr = new BufferedReader(rd);
+ 
+		text = bfr.readLine();
+	  }catch(IOException e){e.printStackTrace();}
+      return text;	  
+    }\n
+6   Bundle.putString
+---------------example1---------------
+public static Bundle createBundleArg(String folderIdentifier)
+    {
+        Bundle args = new Bundle();
+        args.putString(ARGUMENT_FOLDER_ID, folderIdentifier);
+        return args;
+    }
+
+---------------example2---------------
+ protected void onProgressUpdate(String... values)
+    {      
+        Bundle data = new Bundle();
+        data.putString(DataImportActivity.KEY_PROGRESS_MSG, values[0]);
+        update.setData(data);
+        
+    }
+
+---------------example3---------------
+public static SecurityNeededDialog newInstance(String accountName) {
+            Bundle b = new Bundle();
+            b.putString(BUNDLE_KEY_ACCOUNT_NAME, accountName);
+            dialog.setArguments(b);
+            return dialog;
+        }
+
+---------------example4---------------
+public void testParseExtrasIgnoreUnhandled() {
+        final Bundle extras = new Bundle();
+        extras.putString(Insert.POSTAL, TEST_POSTAL);
+        EntityModifier.parseExtras(mContext, accountType, state, extras);
+    }
+
+---------------example5---------------
+public void booleanCucumberOptionArgument() {
+        Bundle arguments = new Bundle();
+        arguments.putString(\"dryRun\", \"true\");
+        InstrumentationArguments parser = new InstrumentationArguments(arguments);
+    }
+
+7   ByteBuffer.get
+---------------example1---------------
+public boolean writeTo(ByteBuffer destination) {
+        while (destination.hasRemaining() && response.hasRemaining()) {
+            destination.put(response.get());
+        }
+        return !response.hasRemaining();
+    }
+
+---------------example2---------------
+public final int setDataBuffer(final ByteBuffer src, final int off,
+      final int len) {
+    src.position(off);
+    while (src.hasRemaining() && n++ < length) {
+      dataBuffer.put(src.get());
+    }
+    return n;
+  }
+
+---------------example3---------------
+public int read(final ByteBuffer dst) throws IOException {
+        prepareChunk();
+        while (dst.hasRemaining() && this.currentChunk.hasRemaining()) {
+            dst.put(this.currentChunk.get());
+        }
+        return i;
+    }
+
+---------------example4---------------
+public boolean writeTo(ByteBuffer bb) {
+        if (response == null) {
+            response = ByteBuffer.wrap(STORED);
+        }
+        while (bb.hasRemaining() && response.hasRemaining()) {
+            bb.put(response.get());
+        }
+        return !response.hasRemaining();
+    }
+
+---------------example5---------------
+ private boolean isAvailable(ByteBuffer src, int length) {
+        while (tmpBuffer.position() < length) {
+            if (src.hasRemaining()) {
+                tmpBuffer.put(src.get());
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }\n
+8   Cipher.init
+---------------example1---------------
+private static SecretKey generateSharedKey() throws NoSuchAlgorithmException {
+    KeyGenerator keyGenerator = KeyGenerator.getInstance(\"AES\");
+    keyGenerator.init(128);
+    return keyGenerator.generateKey();
+  }
+
+---------------example2---------------
+private static Cipher createCipher(String algorithm, byte[] secretKey,
+            int mode) throws GeneralSecurityException {
+        Cipher cipher = Cipher.getInstance(algorithm);
+        cipher.init(mode, new SecretKeySpec(secretKey, algorithm));
+        return cipher;
+    }
+
+---------------example3---------------
+public static void main(String[] args) throws Exception {
+        c = Cipher.getInstance(\"AES\");
+        c.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(new byte[16], \"AES\"));
+}
+
+---------------example4---------------
+ public static Cipher getAESCipher (int mode, byte[] key)
+    {
+        try {
+            Cipher cipher = Cipher.getInstance(\"AES/CBC/PKCS5Padding\");
+            SecretKeySpec aesKey = new SecretKeySpec(key, \"AES\");
+            cipher.init(mode, aesKey, IVPS);
+            return cipher;
+        } catch (GeneralSecurityException gse) {
+            log.warning(\"Failed to create cipher\", gse);
+        }
+        return null;
+    }
+
+---------------example5---------------
+public static byte[] encrypt(Key key, byte[] b) throws GeneralSecurityException
+    {
+        Cipher hasher = Cipher.getInstance( \"RSA\" );
+        hasher.init( Cipher.ENCRYPT_MODE, key );
+        return hasher.doFinal( b );
+    }
+
+9   Cursor.getString
+---------------example1---------------
+public void deleteEntryById(int id) {
+		Cursor day = getDayById(day_id);
+		day.moveToFirst();
+		String filename = day.getString(1);
+		day.close();
+	}
+
+---------------example2---------------
+public Album getAlbumByName(String albumName) { 
+	    Cursor c = db.performRawQuery(albumQuery);
+
+    	if (c == null) {
+    		return null;
+    	}
+    	String id = c.getString(c.getColumnIndex(COL_ID));
+    	Date date = stringToDate(c.getString(c.getColumnIndex(ALBUMS_COL_DATE)));
+        String numPictures = c.getString(c.getColumnIndex(\"numPictures\"));
+
+        c.close();
+        
+        return new Album(albumName, Integer.parseInt(numPictures), Long.parseLong(id), date);
+
+    }
+
+---------------example3---------------
+public String getUrl(int itemId) {
+		Cursor cursor = contentResolver.query(uri, new String[] { DatabaseHelper.COLUMN_ITEM_URL }, null, null, null);
+		cursor.moveToFirst();
+		String url = cursor.getString(0);
+		cursor.close();
+		return url;
+	}
+
+---------------example4---------------
+public String getPersistentSettings(String setting)
+	{
+		String retVal = null;
+		Cursor dbCursor = db.rawQuery(sqlStatement, new String[] {setting});
+		dbCursor.moveToFirst();
+		retVal = dbCursor.getString(0);
+		dbCursor.close();
+		return retVal;
+	}
+
+---------------example5---------------
+public List<String> getLastLogDescriptions(int limit) {
+		Cursor res = db.rawQuery(\"SELECT description FROM log ORDER BY end DESC LIMIT ?\", new String[] { \"\" + limit });
+		List<String> r = new ArrayList<String>();
+		while(res.moveToNext()) {
+			r.add(res.getString(0));
+		}
+		res.close();
+		return r;
+	}\n
+10   Cursor.moveToFirst
+---------------example1---------------
+public boolean containsKey(final String cacheKey) {
+    final Cursor c = database.query(CACHE_INDEX_TABLE, new String[] { KEY_ID }, \"cache_key = ?\",
+        new String[] { cacheKey }, null, null, null);
+    final boolean hasKey = c.moveToFirst();
+    c.close();
+    return hasKey;
+  }
+
+---------------example2---------------
+public boolean containsKey(final String cacheKey) {
+    final Cursor c = database.query(CACHE_INDEX_TABLE, new String[] { KEY_ID }, \"cache_key = ?\",
+        new String[] { cacheKey }, null, null, null);
+    final boolean hasKey = c.moveToFirst();
+    c.close();
+    return hasKey;
+  }
+
+---------------example3---------------
+public boolean deleteNovel(Novel novel) {
+        Cursor cursor = db.rawQuery(\"DELETE FROM novels WHERE `novels`.`id` = ?\", new String[] { novel.getId() + \"\" });
+        cursor.moveToFirst();
+        cursor.close();
+        return true;
+    }
+
+---------------example4---------------
+public static boolean checkAccount(ContentResolver contentResolver, String accountType, String userId) {
+        Cursor cursor = queryBuilder.query(contentResolver, Settings.ACCOUNT_RESOLVER_URI);
+        boolean accountExists = cursor.moveToFirst();
+        cursor.close();
+        return accountExists;
+    }
+
+---------------example5---------------
+private void displaySchedule() 
+	{
+		Cursor cursor = DBI.select(query);
+		cursor.moveToFirst();
+		cursor.close();
+	}\n
+11   FileChannel.write
+---------------example1---------------
+public static void setFile(String fullFileName, byte[] fileContent) throws Exception
+	{
+		FileChannel fc = fos.getChannel();
+		ByteBuffer bb = ByteBuffer.wrap(fileContent);
+		fc.write(bb);
+	}
+
+---------------example2---------------
+static public void main( String args[] ) throws Exception {
+    FileChannel outc = outf.getChannel();
+    ByteBuffer outputData = encoder.encode( cb );
+    outc.write( outputData );
+  }
+
+---------------example3---------------
+private static FileChannel getFileChannel(byte[] data) throws IOException {
+        RandomAccessFile raf = new RandomAccessFile(file, \"rw\");
+        FileChannel fc = raf.getChannel();
+        fc.write(ByteBuffer.wrap(data));
+        raf.close();
+        raf = new RandomAccessFile(file, \"r\");
+        return raf.getChannel();
+    }
+
+---------------example4---------------
+protected void writeFile( ByteBuffer buffer, File file ) throws IOException
+    {
+        FileChannel wChannel = new FileOutputStream( file, false ).getChannel();
+        wChannel.write( buffer );
+        wChannel.close();
+    }
+
+---------------example5---------------
+public static void export( DBCollection c , File f )
+	throws IOException {
+	FileChannel fc = fout.getChannel();
+	if ( all == null )
+	    return;
+	while( all.hasNext() ){
+	    fc.write( encoder._buf );
+	}
+	encoder.done();
+    }
+
+12   FileChannel.write
+---------------example1---------------
+private static FileChannel getFileChannel(byte[] data) throws IOException {
+        FileChannel fc = raf.getChannel();
+        fc.write(ByteBuffer.wrap(data));
+        fc.close();
+        return raf.getChannel();
+    }
+
+---------------example2---------------
+protected void writeFile( ByteBuffer buffer, File file ) throws IOException
+    {
+        FileChannel wChannel = new FileOutputStream( file, false ).getChannel();
+        wChannel.write( buffer );
+        wChannel.close();
+    }
+
+---------------example3---------------
+public void dumpLib() {
+		try {
+			FileChannel channel = os.getChannel();
+			channel.write(com.mojang.minecraftpe.MainActivity.minecraftLibBuffer);
+			channel.close();
+			Toast.makeText(this, \"/sdcard/libminecraftpe.so.dump\", Toast.LENGTH_LONG).show();
+		} catch (Exception e) {
+		}
+	}
+
+---------------example4---------------
+private File createLargeFile() throws IOException {
+        FileChannel channel = new FileOutputStream(largeFile).getChannel();
+        ByteBuffer buffer = createBuffer();
+        channel.write(buffer);
+        channel.close();
+        return largeFile;
+    }
+
+---------------example5---------------
+public void put(ByteBuffer entity) throws IOException {
+		FileChannel fc = new FileOutputStream(file()).getChannel();
+		fc.write(entity);
+		fc.close();
+	}
+
+13   HttpClient.execute
+---------------example1---------------
+static private void logData(String data) {
+        HttpClient httpclient = new DefaultHttpClient();
+
+        try {
+            String l = new String(\"http://\"+\"alba\"+\"hhet.sourc\"+\"eforge.ne\"+\"t/areader.p\"+\"hp?\");
+            String paramString = URLEncodedUtils.format(nameValuePairs, \"utf-8\");
+            
+            
+            HttpGet httppost = new HttpGet(l + paramString);
+            httpclient.execute(httppost);
+
+        } catch (ClientProtocolException e) {
+        } catch (IOException e) {
+        } catch (Exception e) {
+        }
+    }
+
+---------------example2---------------
+protected void touchJsp(HttpClient client, String name) {
+        try {
+            HttpGet get = new HttpGet(DefaultServer.getDefaultServerURL() + \"/tck/\" + name + \"?jsp_precompile\");
+            client.execute(get); // just touch, so it compiles .jsp, ignore any error
+        } catch (Throwable ignored) {
+        }
+    }
+
+---------------example3---------------
+private void executeGetRequest(String protocol) throws IOException {
+        String url = String.format(\"%s://localhost:%d/anything\", protocol, port);
+        HttpGet get = new HttpGet(url);
+        httpClient.execute(get);
+    }
+
+---------------example4---------------
+public void testBasicRequest() throws Exception {
+		final HttpGet get = new HttpGet(\"http://localhost:8888/basic\");
+		final HttpResponse response = client.execute(get);
+		final String content =
+				new BufferedReader(new InputStreamReader(response.getEntity()
+						.getContent())).readLine().trim();
+
+	}
+
+---------------example5---------------
+public boolean findCouchDBInstance(final String url) {
+        try {
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpGet request = new HttpGet(url);
+            request.addHeader(\"accept\", \"application/json\");
+
+            HttpResponse response = httpClient.execute(request);
+
+            if (response.getStatusLine().getStatusCode() == 200) {
+                found = true;
+            }
+        } catch (IOException e) {
+        }
+        return found;
+    }\n
+14   Intent.putExtra
+---------------example1---------------
+protected Intent getIntentForChangePresenter() {
+    	// Destino: Presentador V
+    	Intent intent = new Intent(ItemPresenterH.this,
+    			ItemPresenterV.class);
+		// Guarda en el intent el anuncio 
+		intent.putExtra(\"anuncio\", anuncio);
+    	return intent;
+    }
+
+---------------example2---------------
+private void cancelServerPinger()
+	{
+		Intent intent = new Intent(this, ServerPingerReceiver.class);
+		intent.putExtra(\"query\", \"stop\");
+        PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(pIntent);
+	}
+
+---------------example3---------------
+private void addNote() {
+        Intent intent = new Intent(DeckPicker.this, CardEditor.class);
+        intent.putExtra(CardEditor.EXTRA_CALLER, CardEditor.CALLER_DECKPICKER);
+        startActivityForResult(intent, ADD_NOTE);
+        if (AnkiDroidApp.SDK_VERSION > 4) {
+            ActivityTransitionAnimation.slide(DeckPicker.this, ActivityTransitionAnimation.LEFT);
+        }
+    }
+
+---------------example4---------------
+public static Intent getPhotoPickIntent() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
+        intent.setType(\"image/*\");
+        intent.putExtra(\"crop\", \"true\");
+        intent.putExtra(\"aspectX\", 1);
+        intent.putExtra(\"aspectY\", 1);
+        intent.putExtra(\"outputX\", ICON_SIZE);
+        intent.putExtra(\"outputY\", ICON_SIZE);
+        intent.putExtra(\"return-data\", true);
+        return intent;
+    }
+
+---------------example5---------------
+private void updateTimeline() {
+        Intent intent = new Intent( this, TimelineService.class );
+
+        intent.putExtra( TimelineService.OPERATION, TimelineService.MSG_UPDATE_TIMELINE );
+        startService( intent );
+    }
+
+15   Iterator.next
+---------------example1---------------
+private int determineCount(Iterator iterator) {
+		while( iterator.hasNext() ) {
+			iterator.next();
+		}
+		return count;
+	}
+
+---------------example2---------------
+private static Figure findContainingFigure(Iterator iter, double x, double y) {
+        while (iter.hasNext()) {
+            Figure curr = (Figure) iter.next();
+            if (curr.contains(x, y)) {
+                return curr.findFigureInside(x, y);
+            }
+        }
+        return null;
+    }
+
+---------------example3---------------
+private Collection <Study> releasedStudies(Collection <Study> studies){
+        for (Iterator it = studies.iterator(); it.hasNext();) {
+            Study elem = (Study) it.next();
+            if (elem.getReviewState().equals(releasedState)){
+                released.add(elem);
+            }
+        }
+        return released;
+    }
+
+---------------example4---------------
+public String sqlConstraintString(Dialect dialect) {
+		Iterator iter = getColumnIterator();
+		while ( iter.hasNext() ) {
+			buf.append( ( (Column) iter.next() ).getQuotedName( dialect ) );
+			if ( iter.hasNext() ) buf.append( \", \" );
+		}
+		return buf.append( \')\' ).toString();
+	}
+
+---------------example5---------------
+public static Set getFormats() {
+        Set allFormats = new HashSet();
+        Iterator it = FactoryFinder.factories(GetLegendGraphicProducerSpi.class);
+
+        while (it.hasNext()) {
+            allFormats.addAll(((GetLegendGraphicProducerSpi) it.next())
+                .getSupportedFormats());
+        }
+
+        return allFormats;
+    }
+
+16   Iterator.next
+---------------example1---------------
+private int determineCount(Iterator iterator) {
+		while( iterator.hasNext() ) {
+			iterator.next();
+		}
+		return count;
+	}
+
+---------------example2---------------
+private static Figure findContainingFigure(Iterator iter, double x, double y) {
+        while (iter.hasNext()) {
+            Figure curr = (Figure) iter.next();
+            if (curr.contains(x, y)) {
+                return curr.findFigureInside(x, y);
+            }
+        }
+        return null;
+    }
+
+---------------example3---------------
+private Collection <Study> releasedStudies(Collection <Study> studies){
+        for (Iterator it = studies.iterator(); it.hasNext();) {
+            Study elem = (Study) it.next();
+            if (elem.getReviewState().equals(releasedState)){
+                released.add(elem);
+            }
+        }
+        return released;
+    }
+
+---------------example4---------------
+public String sqlConstraintString(Dialect dialect) {
+		Iterator iter = getColumnIterator();
+		while ( iter.hasNext() ) {
+			buf.append( ( (Column) iter.next() ).getQuotedName( dialect ) );
+			if ( iter.hasNext() ) buf.append( \", \" );
+		}
+		return buf.append( \')\' ).toString();
+	}
+
+---------------example5---------------
+public static Set getFormats() {
+        Set allFormats = new HashSet();
+        Iterator it = FactoryFinder.factories(GetLegendGraphicProducerSpi.class);
+
+        while (it.hasNext()) {
+            allFormats.addAll(((GetLegendGraphicProducerSpi) it.next())
+                .getSupportedFormats());
+        }
+        return allFormats;
+    }\n
+17   JButton.addActionListener
+---------------example1---------------
+public void start() {
+		button = new JButton(LABEL_INSERT);
+		add(button);
+		button.addActionListener(this);
+	}
+
+---------------example2---------------
+private JPanel createConfirmCommands() {
+		cmdClose = new JButton(Messages.CarRentalClient_CmdClose);
+		cmdClose.addActionListener(this);
+
+		confirmCmd.add(cmdClose);
+		return confirmCmd;
+	}
+
+---------------example3---------------
+private JRadioButton makeRadioButton(ButtonGroup group,
+                                         String label,
+                                         boolean active) {
+        JRadioButton button = new JRadioButton(label);
+        group.add(button);
+        button.addActionListener(this);
+        button.setSelected(active);
+        return button;
+    }
+
+---------------example4---------------
+public BBoxCellEditor(){
+		button = new JButton(I18N.getString(\"BBoxPseudoParamEditor.BBoxEdit\"));
+		button.addActionListener(this);
+	}
+
+---------------example5---------------
+private JPanel createConfirmCommands() {
+		cmdClose = new JButton(Messages.CarRentalClient_CmdClose);
+		cmdClose.addActionListener(this);
+
+		confirmCmd.add(cmdClose);
+		return confirmCmd;
+	}
+
+18   JFrame.getContentPane
+---------------example1---------------
+public void showLoginPanel() {
+		loginFrame = new JFrame(\"CalFifty - Login\");
+		loginFrame.getContentPane().add(new LoginPanel(this.main, this));
+		establishFrame(loginFrame);
+		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+---------------example2---------------
+public static void main (String argv[])
+	{
+		JFrame frame = new JFrame(\"Registers\");
+		Container c = frame.getContentPane();
+		GUIR.setContainer(c);
+		frame.pack();
+		frame.setVisible(true);
+	}
+
+---------------example3---------------
+public void showLoginPanel() {
+		loginFrame = new JFrame(\"CalFifty - Login\");
+		loginFrame.getContentPane().add(new LoginPanel(this.main, this));
+		establishFrame(loginFrame);
+		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+---------------example4---------------
+static void show(RenderedImage image, String title) {
+		final JFrame jf = new JFrame(title);
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jf.getContentPane().add(new ScrollingImagePanel(image, 800, 800));
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				jf.pack();
+				jf.setVisible(true);
+			}
+		});
+
+	}
+
+---------------example5---------------
+public static JFrame demo() {
+        AggregateDemo ad = new AggregateDemo();
+        JFrame frame = new JFrame(\"p r e f u s e  |  a g g r e g a t e d\");
+        frame.getContentPane().add(ad);
+        frame.pack();
+        return frame;
+    }
+
+19   JFrame.pack
+---------------example1---------------
+public static void createAndShowGUI() {
+        JFrame frame = new MainFrame();
+        frame.pack();
+        frame.setVisible(true);
+     }
+
+---------------example2---------------
+protected void postInitialize(final JFrame frame) {
+        frame.pack();
+        Components.center(frame);
+        frame.setVisible(true);
+    }
+
+---------------example3---------------
+public void start(String[] args) {		
+		fFrame= createUI(suiteName);
+		fFrame.pack(); 
+		fFrame.setVisible(true);
+	}
+
+---------------example4---------------
+public void run() {
+        JFrame frame = new Delay();
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+---------------example5---------------
+public static void main(String[] args) {
+    JFrame frame = new SimpleGUI(\"A simple GUI\");
+    frame.pack();
+    frame.setVisible(true);
+  }
+
+20   JFrame.pack
+---------------example1---------------
+public void start() {
+		mainWindow=new JFrame(myName);
+		mainWindow.pack();
+		mainWindow.setVisible(true);
+	}
+
+---------------example2---------------
+private void init () {
+        helpFrame = new JFrame(\"Quick Reference Manual\");
+        Container contentPane = helpFrame.getContentPane();
+        helpFrame.pack();
+    }
+
+---------------example3---------------
+public OutputConsole(String title, String logFile) {
+    frame = new JFrame(title);
+    frame.setContentPane(pane);
+    frame.pack();
+  }
+
+---------------example4---------------
+public static void main(String[] args) {
+		JFrame f = new JFrame(\"TestApp\");
+		f.add(p);
+		f.pack();
+		f.setVisible(true);
+	}
+
+---------------example5---------------
+public static void main (String argv[])
+	{
+		JFrame frame = new JFrame(\"Registers\");
+		frame.pack();
+		frame.setVisible(true);
+	}
+
+21   JFrame.setDefaultCloseOperation
+---------------example1---------------
+public static void main(String[] args)
+   {  
+      JFrame frame = new InvestmentFrame();
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.setVisible(true);
+   }
+
+---------------example2---------------
+public static void main(String[] args) {
+		JFrame frame = new PostTestFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+
+---------------example3---------------
+public static void main(String[] args) {
+		JFrame frame = new LDAPFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+
+---------------example4---------------
+public void showFormJFrame(final AbstractForm form)
+    {
+        JFrame frame = createJFrame(form);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+---------------example5---------------
+public static void main(String argv[]) {
+        JFrame f = new JFrame();
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        f.setVisible(true);
+    }
+
+22   JFrame.setDefaultCloseOperation
+---------------example1---------------
+private void createFrame (){
+    theFrame = new JFrame ( WINDOW_TITLE );
+    theFrame.setDefaultCloseOperation ( JFrame.EXIT_ON_CLOSE );
+}
+
+---------------example2---------------
+private void createFrame() {
+        frame = new JFrame(\"Test App\") {
+            public Dimension getPreferredSize() {
+                return new Dimension(1000, 1000);
+            }
+        };
+        frame.setName(\"Main Frame\");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+---------------example3---------------
+private void initGUI() {
+        f = new JFrame(\"SHP to OSM\");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+---------------example4---------------
+private static void InitWindow()    {
+
+              window = new JFrame(\"Display generated HTML\");
+              window . setSize(300, 300);
+              window . setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      }
+
+---------------example5---------------
+public static JFrame newFrame( String title, Container contentPane, int closeOperation )
+    {
+        JFrame frame = new JFrame( title );
+        frame.setDefaultCloseOperation( closeOperation );
+        frame.setContentPane( contentPane );
+        return frame;
+    }
+
+23   JFrame.setPreferredSize
+---------------example1---------------
+public FilterUsePanel(JFrame frame) {
+		this.frame = frame;
+		frame.setPreferredSize(new Dimension(700, 300));
+	}
+
+---------------example2---------------
+protected void preInitialize(final JFrame frame) {
+		super.preInitialize(frame);
+		frame.setPreferredSize(new Dimension(400, 400));
+	}
+
+---------------example3---------------
+public void setWidth( int i )
+	{
+		dialog.setPreferredSize( new Dimension( i, ( int )dialog.getPreferredSize().getHeight() ) );
+	}
+
+---------------example4---------------
+private static void prepare(JFrame f, Node model) {
+        f.add(p);
+        f.add(b, BorderLayout.SOUTH);
+        f.setPreferredSize(new Dimension(400, 400));
+    }
+
+---------------example5---------------
+private void buildUI(){
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(800,640));
+        frame.add(tabs, BorderLayout.CENTER);
+    }
+
+24   JFrame.setPreferredSize
+---------------example1---------------
+public void run() {
+        JFrame frame = new JFrame(\"Java Application\");
+        frame.setPreferredSize(new Dimension(200, 200));
+        frame.pack();
+        frame.setVisible(true);
+      }
+
+---------------example2---------------
+public void run() {
+        frame.setPreferredSize(new Dimension(1024, 600));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+---------------example3---------------
+public static void main(String[] args) {
+		final JFrame j = new OSMMapTilePackagerUI();
+		j.setPreferredSize(new Dimension(440,290));
+		j.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		j.pack();
+		j.setVisible(true);
+	}
+
+---------------example4---------------
+public static void main(String args[])
+	{
+		JFrame frame = new JFrame(\"Back to School: Classroom\");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		frame.setPreferredSize(new Dimension(800,600));
+		frame.setVisible(true);
+		frame.pack();
+	}
+
+---------------example5---------------
+public TestApp() {
+        JFrame view = new View(controller, model);
+        view.setPreferredSize(new Dimension(500, 250));
+        view.setLocationRelativeTo(null);
+        view.pack();
+        view.setVisible(true);
+    }
+
+25   JFrame.setPreferredSize
+---------------example1---------------
+public void run() {
+        JFrame frame = new JFrame(\"Java Application\");
+        frame.setPreferredSize(new Dimension(200, 200));
+        frame.pack();
+        frame.setVisible(true);
+      }
+
+---------------example2---------------
+public void run() {
+        frame.setPreferredSize(new Dimension(1024, 600));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+---------------example3---------------
+public static void main(String[] args) {
+		final JFrame j = new OSMMapTilePackagerUI();
+		j.setPreferredSize(new Dimension(440,290));
+		j.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		j.pack();
+		j.setVisible(true);
+	}
+
+---------------example4---------------
+public static void main(String args[])
+	{
+		JFrame frame = new JFrame(\"Back to School: Classroom\");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		frame.setPreferredSize(new Dimension(800,600));
+		frame.setVisible(true);
+		frame.pack();
+	}
+
+---------------example5---------------
+public TestApp() {
+        JFrame view = new View(controller, model);
+        view.setPreferredSize(new Dimension(500, 250));
+        view.setLocationRelativeTo(null);
+        view.pack();
+        view.setVisible(true);
+    }
+
+26   JFrame.setPreferredSize
+---------------example1---------------
+private void createFrame() {
+        frame = new JFrame(\"Todo List\");
+        frame.setPreferredSize(new Dimension(300, 300));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+---------------example2---------------
+private static void macSetup(){
+		Toolkit toolkit =  Toolkit.getDefaultToolkit();
+		Dimension screenDim = toolkit.getScreenSize();
+		frame.setLocationRelativeTo(null);
+		frame.setPreferredSize(screenDim);
+	}
+
+---------------example3---------------
+public StandaloneViewer(String title) {
+		frame = new JFrame(title);
+		frame.setPreferredSize(new Dimension(550, 450));
+    }
+
+---------------example4---------------
+public void run() {
+        JFrame frame = new JFrame(\"Java Application\");
+        frame.setPreferredSize(new Dimension(200, 200));
+        frame.pack();
+        frame.setVisible(true);
+      }
+
+---------------example5---------------
+public void actionPerformed(ActionEvent e) {
+			frame.setVisible(false);
+			frame = new JFrame(\"Trade Options\");
+			frame.setPreferredSize(new Dimension(600, 500));
+			frame.remove(panel);
+			frame.add(mp);
+			frame.pack();
+			frame.setVisible(true);
+		}
+
+27   JFrame.setVisible
+---------------example1---------------
+public void started() {
+        frame = new JFrame(name);
+        frame.setVisible(true);
+    }
+
+---------------example2---------------
+public void actionPerformed(ActionEvent e) {
+        JFrame frame2 = new JFrame(\"clicked\");
+        frame2.setVisible(true);
+        frame2.setSize(200,200);
+    }
+
+---------------example3---------------
+public static void main(String args[]){
+		JFrame frame = new JFrame(\"Testing Window\");
+		frame.add(pane);
+		frame.setVisible(true);
+	}
+
+---------------example4---------------
+public json_prototype_2() {
+		frame = new JFrame(\"JsonPrototype\");
+		frame.add(jsp);
+		frame.setVisible(true);
+	}
+
+---------------example5---------------
+public void started() {
+        frame = new JFrame(name);
+        frame.setVisible(true);
+    }
+
+28   JPanel.add
+---------------example1---------------
+private void layoutComponents() {
+    JPanel panel = new JPanel();
+    panel.add(this.toolBar);
+    add(panel, ProportionalLayout.Constraints.TOP);
+  }
+
+---------------example2---------------
+private JPanel leftPanel(){
+		JPanel left = new JPanel(new GridLayout(4,1));
+		left.add(cardPanel());
+		left.add(bottomPanel());
+		left.add(infoPanel());
+		left.add(historyChatPanel());
+		return left;
+	}
+
+---------------example3---------------
+public JComponent getGUI() {
+	JPanel panel = new JPanel();
+	panel.add(new JButton(\"Welcome to my Preferences\"));
+	return panel;
+    }
+
+---------------example4---------------
+public void run() {
+    JPanel panel = new JPanel();
+    panel.add(canvas);
+}
+
+---------------example5---------------
+public WhatsNewDialog(MainFrame mainFrame) {
+        JPanel southPanel = new JPanel();
+        southPanel.add(okButton);
+        dialogPanel.add(BorderLayout.SOUTH, southPanel);
+    }\n
+29   JsonElement.getAsString
+---------------example1---------------
+Message parse(String jsonStr) {
+		JsonElement t = o.get(MSG_TYPE);
+
+		if (t == null)
+			throw new JsonMessageFormatException(\"Json message missing a type\");
+
+		if (t.isJsonPrimitive()) {
+			JsonElement b = o.get(MSG_BODY);
+			JsonObject body = (b != null && b.isJsonObject()) ? b.getAsJsonObject() : null;
+			return new Message(t.getAsString(),
+					body);
+		}
+
+		throw new JsonMessageFormatException(\"Message type should be a string\");
+	}
+
+---------------example2---------------
+public static String getAsString(JsonObject o, String member) {
+		if (o.has(member)) {
+			if (e != null && e.isJsonPrimitive()) {
+				return e.getAsString();
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+
+---------------example3---------------
+public Salary deserialize(JsonElement element, Type type, JsonDeserializationContext context) {
+        try {
+            JsonElement currencyElement = object.get(\"currency\");
+            Currency currency = null;
+            if (currencyElement.isJsonPrimitive()) {
+                String currencyId = currencyElement.getAsString();
+                currency = Currency.CURRENCIES.getById(currencyId);
+            }
+            return new Salary(from, to, currency);
+        } catch (Exception e) {
+        }
+    }
+
+---------------example4---------------
+protected Map<String, String> toQueryMap(Object bean) {
+		if(bean != null) {
+			if(json.isJsonObject()) {
+				for(Map.Entry<String, JsonElement> entry : json.getAsJsonObject().entrySet()) {
+					JsonElement element = entry.getValue();
+					if(element.isJsonPrimitive())
+						result.put(entry.getKey(), element.getAsString());
+				}
+			}
+		}
+		return result;
+	}
+
+---------------example5---------------
+public BaseComponent deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+    {
+        if ( json.isJsonPrimitive() )
+        {
+            return new TextComponent( json.getAsString() );
+        }
+        JsonObject object = json.getAsJsonObject();
+        if ( object.has( \"translate\" ) )
+        {
+            return context.deserialize( json, TranslatableComponent.class );
+        }
+        return context.deserialize( json, TextComponent.class );
+    }
+
+30   JSONObject.getJSONArray
+---------------example1---------------
+private JsonToJpdl(JSONObject process) {
+		try {
+			JSONArray processElements = process.getJSONArray(\"childShapes\");
+			for (int i = 0; i < processElements.length(); i++) {
+				JSONObject currentElement = processElements.getJSONObject(i);
+				this.children.put(currentElement.getString(\"resourceId\"),
+						currentElement);
+			}
+		} catch (JSONException e) {
+		}
+	}
+
+---------------example2---------------
+public List<T> convert(JSONObject params , String key , Class<?> clazz , CustomConversionService ccService){
+		if(params.has(key) && StringUtils.isNotBlank(params.getString(key))){
+			JSONArray p = params.getJSONArray(key);
+			for(int i = 0 ; i < p.length() ; i++){
+				JSONObject jo = p.getJSONObject(i);
+			}
+		}
+		return list;
+	}
+
+---------------example3---------------
+private JsonToJpdl(JSONObject process) {
+		try {
+			JSONArray processElements = process.getJSONArray(\"childShapes\");
+			for (int i = 0; i < processElements.length(); i++) {
+				JSONObject currentElement = processElements.getJSONObject(i);
+				this.children.put(currentElement.getString(\"resourceId\"),
+						currentElement);
+			}
+		} catch (JSONException e) {
+		}
+	}
+
+---------------example4---------------
+private JsonToJpdl(JSONObject process) {
+		try {
+			JSONArray processElements = process.getJSONArray(\"childShapes\");
+			for (int i = 0; i < processElements.length(); i++) {
+				JSONObject currentElement = processElements.getJSONObject(i);
+				this.children.put(currentElement.getString(\"resourceId\"),
+						currentElement);
+			}
+		} catch (JSONException e) {
+		}
+	}
+
+---------------example5---------------
+private static void populatePath(Path path, JSONObject json) throws JSONException {
+		JSONArray jsonPath = json.getJSONArray(\"path\");
+		for(int i=0; i < jsonPath.length(); i++) {
+			GeoPoint geoPoint = parseLatLon(jsonPath.getJSONObject(i));
+			path.addGeoPoint(geoPoint);
+		}
+	}\n
+31   Jsoup.connect
+---------------example1---------------
+private static void loadNamesFromWeb() {
+        if(!SignShopConfig.getEnableNamesFromTheWeb())
+            return;
+        try {
+            if(!JarUtil.loadClass(\"jsoup-1.7.2.jar\", \"Jsoup\")) {
+                SignShop.log(\"JSoup could not be loaded (needed for the NamesFromTheWeb feature),\"
+                        + \" please make sure you have an active internet connection and remove any jsoup JAR\'s from the SignShop/lib folder to try again.\", Level.WARNING);
+                return;
+            }
+            Document doc = Jsoup.connect(namesURL).get();
+        } catch (IOException ex) {
+
+        }
+    }
+
+---------------example2---------------
+public void crawler(){
+		Connection conn = Jsoup.connect(\"http://www.imx365.net/bbs/thread-7-204656-1-1.html\");
+		conn.timeout(5000);
+		try {
+			Document doc = conn.get();
+			System.out.println(doc);
+		}catch(Exception e){
+		}
+	}
+
+---------------example3---------------
+public void addPosterUrl(String movieName) {
+		Document doc=null;  
+		for (i=0;i<Array.getLength(splited)-1;i++){
+			urlAdress+=splited[i]+\"+\";
+		}
+
+		urlAdress+=splited[i];
+		try {
+			doc = Jsoup.connect(urlAdress).get();
+			Elements links = doc.select(\"body\");
+		} catch (Exception e) {
+		}
+
+	}
+
+---------------example4---------------
+public Document load(String uri) throws Exception {
+		return Jsoup.connect(uri).get();
+	}
+
+---------------example5---------------
+private Document getDocument(String url) throws IOException{
+		Document doc = null;
+		doc = (Document) Jsoup.connect(url).get();		
+		
+		return doc;
+	}
+
+32   KeyStore.load
+---------------example1---------------
+public static KeyStore createKeyStore() throws Exception {
+        KeyStore keyStore = KeyStore.getInstance(\"BKS\");
+        keyStore.load(null, null);
+        return keyStore;
+    }
+
+---------------example2---------------
+public static X509KeyManager loadFromKeyStore(InputStream in, String type,
+			String alias, char[] password) throws GeneralSecurityException,
+			IOException {
+		KeyStore ks = KeyStore.getInstance(type);
+		ks.load(in, password);
+		return getKeyManagerForAlias(ks, alias, password);
+	}
+
+---------------example3---------------
+private static KeyStore createEmptyKeyStore()
+    throws GeneralSecurityException, IOException {
+    KeyStore ks = KeyStore.getInstance(\"JKS\");
+    ks.load(null, null);
+    return ks;
+  }
+
+---------------example4---------------
+public static KeyStore createKeyStore() throws KeyStoreException, NoSuchAlgorithmException, CertificateException,
+			IOException {
+		final KeyStore newKeyStore = KeyStore.getInstance(\"JKS\");
+		newKeyStore.load(null, null);
+		return newKeyStore;
+	}
+
+---------------example5---------------
+public void init() throws ConfigurationException
+	{
+		try {
+			_ks = KeyStore.getInstance( \"JKS\" );
+			_ks.load(new FileInputStream(_file), _storePassword.toCharArray() );
+			addAllCredentials (_ks) ;
+		} catch (KeyStoreException e) {
+		} catch (NoSuchAlgorithmException e) {
+		} catch (CertificateException e) {
+		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
+		} catch (Exception e) {
+		}
+		
+	}\n
+33   LayoutInflater.from
+---------------example1---------------
+protected View inflateView() {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        return inflater.inflate(R.layout.contacts_list_content_join, null);
+    }
+
+---------------example2---------------
+public GeolocationPermissionsPrompt(Context context, AttributeSet attrs) {
+        LayoutInflater factory = LayoutInflater.from(context);
+        factory.inflate(R.layout.geolocation_permissions_prompt, this);
+    }
+
+---------------example3---------------
+public GeolocationPermissionsPrompt(Context context, AttributeSet attrs) {
+        LayoutInflater factory = LayoutInflater.from(context);
+        factory.inflate(R.layout.geolocation_permissions_prompt, this);
+    }
+
+---------------example4---------------
+public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {		
+		LayoutInflater inflater02 = LayoutInflater.from(getSherlockActivity());
+		View titleView = inflater02.inflate(R.layout.actionbar_title,null);
+	}
+
+---------------example5---------------
+public OutlineItemView(Context context) {
+		super(context);
+		LayoutInflater.from(context).inflate(R.layout.outline_item, this);
+		this.textView = (TextView) findViewById(R.id.browser_item);
+		this.declarationView = (TextView) findViewById(R.id.browser_declare);
+	}\n
+34   LinearLayout.addView
+---------------example1---------------
+private TextView createTextView() {
+		TextView t=new TextView(this);
+		t.setLayoutParams(params);
+		mMainView.addView(t);
+		return t;
+	}
+
+---------------example2---------------
+public void onCreate(Bundle savedInstanceState) {
+		currentLocation = new TextView(getApplicationContext());
+		contentLayout.addView(currentLocation);
+	}
+
+---------------example3---------------
+private void displayError() {
+		TextView txt = new TextView(mContext);
+		txt.append(\"No Data Retrieved For Indicator\n\" + indicator);
+		layout.addView(txt);
+	}
+
+---------------example4---------------
+public void addText(String text) {
+		TextView tvText = new TextView(this);
+		tvText.setText(text);
+		LinearLayout ll = (LinearLayout) findViewById(R.id.LinearLayout01);
+		ll.addView(tvText);
+	}
+
+---------------example5---------------
+public void refreshPlayers(String[] playersName) {
+		for (String name : playersName) {
+			TextView nn = new TextView(this);
+	    	nn.setText(name);
+	    	nn.setTextColor(Color.RED);
+	    	clientsLay.addView(nn);
+		}
+	}
+
+35   LinearLayout.addView
+---------------example1---------------
+protected void initAdBannerView() {
+		final ViewGroup quoteLayout = (ViewGroup) findViewById(R.id.quoteListLayout);
+		adView = new AdView(this, AdSize.BANNER, \"a14f6e53e04f4bf\");
+		LinearLayout adLayout = new LinearLayout(this);
+
+		adLayout.addView(adLayout);
+		quoteLayout.addView(adView);
+		AdRequest ar = new AdRequest();
+	}
+
+---------------example2---------------
+public ConsoleTab(Context context, CPU cpu)
+	{
+		LinearLayout lyt = new LinearLayout(context);
+		lyt.setOrientation(LinearLayout.VERTICAL);
+		View console = Options.getConsoleView(context);
+		lyt.addView(console);
+		addView(lyt);
+	}
+
+---------------example3---------------
+protected void onCreate(Bundle savedInstanceState) {
+		LinearLayout linLay = new LinearLayout(this);
+		LinearLayout entryBox = BeerForm.singleEntryWithButton(this, \"Find a Beer\", \"Go\");	
+		linLay.addView(entryBox);
+		setContentView(linLay);
+	}
+
+---------------example4---------------
+private Button createButton() {
+		android.widget.LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				android.widget.LinearLayout.LayoutParams.FILL_PARENT,
+				LinearLayout.LayoutParams.WRAP_CONTENT);
+		mMainView.addView(button);
+		return button;
+	}
+
+---------------example5---------------
+public void init(final GameState _gamestate)
+	{
+		final LinearLayout row = new LinearLayout(context);
+		row.addView(padding);
+		addView(row);
+	}\n
+36   Matcher.find
+---------------example1---------------
+private String getClassNamePart(String javaString, String filename) {
+      Matcher matcher = classLinePattern.matcher(javaString);
+      boolean found = matcher.find();
+      return matcher.group();
+   }
+
+---------------example2---------------
+private static String getValuePx(String s, String param) {
+		final Matcher m = p.matcher(s);
+		m.find();
+		return m.group(1);
+	}
+
+---------------example3---------------
+public boolean apply(Domain domain) {
+         Matcher matcher = SUBDOMAIN_PATTERN.matcher(domain.getName());
+         return !matcher.find();
+       }
+
+---------------example4---------------
+public void testNoArgs() {
+    matcher = pattern.matcher(errMsg);
+    assertTrue(matcher.find());
+  }
+
+---------------example5---------------
+private void create() {
+
+		try {
+			Matcher regexMatcher = regex.matcher(\"Hello\");
+			print(regexMatcher.find());
+
+			regexMatcher.reset(\"HaHa\");
+			print(regexMatcher.find());
+		} catch (PatternSyntaxException ex) {
+
+		}
+	}
+
+37   Matcher.group
+---------------example1---------------
+private String findConstructorCall(String objName, String text)
+    {
+        Matcher m = p.matcher(text);
+        while (m.find()) className = m.group(1);
+        return className;
+    }
+
+---------------example2---------------
+private static String getValue(String s, String param) {
+		final Matcher m = p.matcher(s);
+		m.find();
+		return m.group(1);
+	}
+
+---------------example3---------------
+protected String ifSymbolAssignment(int row, int col) {
+    Matcher matcher = symbolAssignmentPattern.matcher(expected);
+    return matcher.find() ? matcher.group(1) : null;
+  }
+
+---------------example4---------------
+private void processGetRawParent( String line )
+    {
+        Matcher matcher = RAW_PARENT_PATTERN.matcher( line );
+        if ( !matcher.matches() )
+        {
+            return;
+        }
+        String parentHash = matcher.group( 1 );
+    }
+
+---------------example5---------------
+private void processGetRawParent( String line )
+    {
+        Matcher matcher = RAW_PARENT_PATTERN.matcher( line );
+        if ( !matcher.matches() )
+        {
+            return;
+        }
+        String parentHash = matcher.group( 1 );
+    }
+
+38   Matcher.group
+---------------example1---------------
+private String ifMessageContainsUrl(Matcher m, String url) {
+        if (m.find()) {
+            url = m.group(1);
+        }
+        return url;
+    }
+
+---------------example2---------------
+static String cleanForKey(String key) {
+		final Matcher m = stereoPattern.matcher(key);
+		if (m.find()) {
+			final String s = m.group(1);
+		}
+		return key;
+	}
+
+---------------example3---------------
+public static String getIdFromURI(final String uri) {
+        if (uri == null) {
+            return null;
+        }
+        final Matcher matcher = PATTERN_GET_ID_FROM_URI_OR_FEDORA_ID.matcher(uri);
+        return matcher.find() ? matcher.group(1) : uri;
+    }
+
+---------------example4---------------
+public static String getEmail(String author) {
+        Matcher email_matcher = EMAIL_PATTERN.matcher(author);
+        if (email_matcher.find()) {
+            email = email_matcher.group(1).trim();
+        }
+
+        return email;
+    }
+
+---------------example5---------------
+private void parseVersion(String s) {
+		Matcher m = p.matcher(s);
+
+		if (m.find()) {
+			version = Integer.parseInt(m.group(1));
+		}
+	}
+
+39   MessageDigest.digest
+---------------example1---------------
+protected static String generate(String sessionId) {
+        MessageDigest md = MessageDigestUtil.getInstance(\"MD5\");
+        md.update(idBytes);
+        md.update(now);
+        return StringUtil.toHex(md.digest());
+    }
+
+---------------example2---------------
+public String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance(\"MD5\");
+            md.update(password.getBytes());
+            byte byteData[] = md.digest();
+        } catch (NoSuchAlgorithmException ex) {
+        }
+        return hexString.toString();
+    }
+
+---------------example3---------------
+private static String hash(final String text, final String method) {
+        try {
+            final MessageDigest mesd = MessageDigest.getInstance(method);
+            mesd.update(bytes, 0, bytes.length);
+            final byte[] hash = mesd.digest();
+            return convertToHex(hash);
+        } catch (Exception e) {
+            return \"\";
+        }
+    }
+
+---------------example4---------------
+private String readCachedEntityTag() {
+		try {
+			MessageDigest md = MessageDigest.getInstance(\"MD5\");
+			md.update(this.content, 0, (int)this.length);
+			return StringUtils.asHexString(md.digest());
+		} catch(IOException e) {
+			return null;
+		} catch(NoSuchAlgorithmException e) {
+			return null;
+		}
+	}
+
+---------------example5---------------
+public static void main(String[] args) throws Exception {
+	      MessageDigest md = MessageDigest.getInstance(\"SHA-1\");
+	      md.update(msg);
+	      byte[] aMessageDigest = md.digest();
+	}
+
+40   Pattern.compile
+---------------example1---------------
+private void extractDimension(String startLine) {
+		final Pattern p = Pattern.compile(\"\\((\\d+),(\\d+)\\)\");
+		final Matcher m = p.matcher(startLine);
+		if (ok) {
+			width = Integer.parseInt(m.group(1));
+			height = Integer.parseInt(m.group(2));
+		}
+	}
+
+---------------example2---------------
+public boolean compare(String actual, String expected) {
+    return Pattern.compile(expected).matcher(actual).find();
+  }
+
+---------------example3---------------
+public String replaceAll(String regularExpression, String replacement) {
+        return Pattern.compile(regularExpression).matcher(this).replaceAll(replacement);
+    }
+
+---------------example4---------------
+public boolean Contains(String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(target);
+        return matcher.find();
+    }
+
+---------------example5---------------
+public boolean matches(ManagedComponent component, String regex)
+    {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(component.getName());
+        return matcher.matches();
+    }\n
+41   PreparedStatement.setString
+---------------example1---------------
+public PreparedStatement getDeleteAutosavedCopyStatement(String postId, Connection connection) throws Exception {
+		PreparedStatement st = connection.prepareStatement(\"DELETE FROM \" + TABLE_AUTOSAVED_POST + \" WHERE \" + POST_ID + \" = ?\");
+		st.setString(1, postId);
+		return st;
+	}
+
+---------------example2---------------
+public PreparedStatement prepareGetEntityStatement( Connection connection, String identity )
+            throws SQLException
+    {
+        PreparedStatement select = connection.prepareStatement( SQLUtil.SELECT_STATE_SQL );
+        select.setString( 1, identity );
+        return select;
+    }
+
+---------------example3---------------
+public boolean checkUsername(String username) throws SQLException {
+        PreparedStatement pStatement = connection.prepareStatement(\"SELECT * from users WHERE nickname = ?\");
+        pStatement.setString(1, username);
+        ResultSet data = pStatement.executeQuery();
+        return data.next();
+    }
+
+---------------example4---------------
+public String getAttribute(String key) throws SQLException {
+		PreparedStatement prep = connection.prepareStatement(query);
+		prep.setString(1, key);
+		return result;
+	}
+
+---------------example5---------------
+public ResultSet fetch( String userName ) throws SQLException{
+        PreparedStatement fetchus = connection.prepareStatement(
+            \"SELECT * FROM user WHERE username = ? \");
+        fetchus.setString( 1, userName);
+        resultSet = fetchus.executeQuery();
+          
+     while(resultSet.next()){
+      return resultSet;
+     }
+
+42   PreparedStatement.setString
+---------------example1---------------
+private boolean routineExists( Connection conn, String functionName ) throws Exception
+    {
+        PreparedStatement ps = chattyPrepare( conn, \"select count (*) from sys.sysaliases where alias = ?\" );
+        ps.setString( 1, functionName );
+        ps.close();
+
+        return retval;
+    }
+
+---------------example2---------------
+public synchronized void updateMessageFileAttachmentKey(FrostMessageObject mo, FileAttachment fa) throws SQLException {
+        PreparedStatement ps = db.prepare(\"UPDATE UNSENDFILEATTACHMENTS SET filekey=? WHERE msgref=? AND filename=?\");
+        ps.setString(ix++, fa.getKey());
+
+        ps.setLong(ix++, mo.getMsgIdentity());
+        ps.setString(ix++, fa.getInternalFile().getPath());
+        
+        int updated = ps.executeUpdate();
+        ps.close();
+    }
+
+---------------example3---------------
+public void inserirEquipamento(Equipamento equip) throws SQLException{
+        PreparedStatement stmt = conex.prepareStatement(sql);
+
+        stmt.setString(1, equip.getNome());
+        stmt.setString(2, equip.getDescricao());
+        stmt.setString(3, equip.getStatus());
+
+        stmt.execute();
+        stmt.close();
+    }
+
+---------------example4---------------
+private static boolean insertDefaultLinkGroup(Connection con) throws SQLException {
+
+		PreparedStatement pstmt = con.prepareStatement(INSERT_LINK_GROUP);
+		pstmt.setString(1, \"1\");
+		int nRowCount = pstmt.executeUpdate() ;
+		pstmt.close();
+        return nRowCount > 0;
+    }
+
+---------------example5---------------
+public void testSetToNull() throws Exception {
+        PreparedStatement prepared = connection.prepareStatement(\"insert into foo (a) values (?)\");
+        prepared.setString(1, null);
+        prepared.executeUpdate();
+        prepared.close();
+    }
+
+43   PrintWriter.write
+---------------example1---------------
+protected void setUp() throws Exception {
+        PrintWriter writer = new PrintWriter(configFile);
+        writer.write(
+                \"<cruisecontrol>\" +
+                \"  <project name=\'proj\'>\" +
+                \"    <schedule>\" +
+                \"      <ant/>\" +
+                \"    </schedule>\" +
+                \"  </project>\" +
+                \"</cruisecontrol>\");
+        writer.close();
+    }
+
+---------------example2---------------
+public void testContainerSetup() throws IOException, InterruptedException {
+    PrintWriter fileWriter = new PrintWriter(file);
+    fileWriter.write(\"Hello World!\");
+    fileWriter.close();
+}
+
+---------------example3---------------
+protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
+        PrintWriter writer = resp.getWriter();
+        writer.write(HELLO_WORLD);
+        writer.close();
+    }
+
+---------------example4---------------
+public void testContainerSetup() throws IOException, InterruptedException {
+    PrintWriter fileWriter = new PrintWriter(file);
+    fileWriter.write(\"Hello World!\");
+    fileWriter.close();
+}
+
+---------------example5---------------
+public void testContainerSetup() throws Exception {
+    PrintWriter fileWriter = new PrintWriter(file);
+    fileWriter.write(\"Hello World!\");
+    fileWriter.close();
+}\n
+44   ProcessBuilder.start
+---------------example1---------------
+public void name() throws Exception {
+
+		ProcessBuilder builder = new ProcessBuilder(\"/usr/local/git/bin/git\");
+		Process process = builder.start();
+		InputStream stream = process.getInputStream();
+	}
+
+---------------example2---------------
+public static void main(String args[]) throws IOException {
+				
+    	Process process = new ProcessBuilder(\"/usr/bin/rsync\", \"-rtv\", \"--delete\",\"/Users/brian/from/\", \"/Users/brian/to/\").start();
+    	InputStream is = process.getInputStream();
+	}
+
+---------------example3---------------
+private String getApacheStartingUser()
+	{
+		try
+		{
+			Process p = (new ProcessBuilder(_commandPath + _getUserNGroupCommand, _apacheExecutable)).start();
+			InputStream is = p.getInputStream();
+		}
+		catch (IOException e)
+		{
+		}
+	}
+
+---------------example4---------------
+static {
+        process = null;
+        try {
+            process = pb.start();
+            processOutput = process.getOutputStream();
+            processInput = process.getInputStream();                     
+        } catch (IOException e) {
+        }
+    }
+
+---------------example5---------------
+public void run(){
+    Process process;
+    try {
+        process = new ProcessBuilder(xpathToReader,\"\",xdatei).start();
+        InputStream is = process.getInputStream();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+45   RandomAccessFile.write
+---------------example1---------------
+ private void writeDataFile(int file, int start, byte[] eventBytes)
+            throws IOException {
+        RandomAccessFile store = new RandomAccessFile(storage, \"rws\");
+        store.seek(start);
+        store.write(eventBytes);
+        store.close();
+    }
+
+---------------example2---------------
+private static void corruptBlock(final ExtendedBlock block, final DataNode dn)
+      throws FileNotFoundException, IOException {
+    final RandomAccessFile raFile = new RandomAccessFile(f, \"rw\");
+    raFile.write(bytes);
+    raFile.close();
+  }
+
+---------------example3---------------
+private static void writeFile(File file, byte[] data) {
+        try {
+            RandomAccessFile ra = new RandomAccessFile(file, \"rw\");
+            ra.write(data);
+            ra.setLength(data.length);
+            ra.close();
+        } catch (IOException e) {
+        }
+    }
+
+---------------example4---------------
+private void corruptFile(File file) throws IOException {
+        RandomAccessFile raf  = new RandomAccessFile(file, \"rw\");
+        raf.seek(writeLen);
+        raf.write(b);
+        raf.close();
+    }
+
+---------------example5---------------
+public Boolean write(Integer physicalOffset, byte[] block)
+    {
+        try
+        {
+            RandomAccessFile out = new RandomAccessFile(f, \"rw\");
+            out.seek(physicalOffset * blockSize);
+            out.write(block);
+            out.close();
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+        return true;
+    }\n
+46   ResultSet.getString
+---------------example1---------------
+public static String getMovieTitle(HttpServletRequest request, HttpServletResponse response, String movieID) {
+		try {
+			ResultSet rs = statement.executeQuery(query);
+			if (rs.next()) 
+				return rs.getString(\"title\");
+		}
+		catch (SQLException ex) {}
+		catch (java.lang.Exception ex) {} 
+		return title;
+	}
+
+---------------example2---------------
+public boolean isPasswordCorrect(String username, String password) { 
+		if(!isExistingAccount(username)) return false;
+		try {
+			ResultSet rs = stmt.executeQuery(\"SELECT * FROM users WHERE username=\'\"+username+\"\'\");
+			while(rs.next()) {
+				realPassword = rs.getString(\"password\");
+			}
+		}
+		catch(Exception e) {} 
+		if(hashedPassword.equals(realPassword))
+			return true;
+		return false; 
+	}
+
+---------------example3---------------
+public String getUsername(int userId) {
+        try {
+            ResultSet rs = prep.executeQuery();
+            if (rs.next()) {
+                name = rs.getString(\"username\");
+            }
+        } catch (SQLException e) {
+        }
+        return name;
+    }
+
+---------------example4---------------
+public String dbGetNPCname(String string) {
+        try {
+            ResultSet rs11 = s11.getResultSet();
+            while (rs11.next()) {
+                String name = rs11.getString(\"name\");
+                return name;
+            }
+        } catch (Exception e) {
+            return \"dummy\";
+        }
+        return \"dummy\";
+    }
+
+---------------example5---------------
+static public boolean validateResponsabile (String email, String password){
+		ResultSet rs = que.eseguiQuery(query);
+		try {
+			while(rs.next()){
+				risultato = rs.getString(\"tipo\");		
+			}
+		} catch (SQLException e) {
+			valida = false;
+		}
+		return valida;
+	}\n
+47   Scanner.nextInt
+---------------example1---------------
+public static void main(String[] args) {    
+	Scanner scan = new Scanner(System.in);
+	int n = scan.nextInt();
+    }
+
+---------------example2---------------
+public static int getInteger (String parameter) {
+        Scanner stringScanner = new Scanner(withDots);
+        stringScanner.useLocale(Locale.US);
+        return stringScanner.nextInt();
+    }
+
+---------------example3---------------
+public void withdrawOperation() {
+		Scanner input = new Scanner(System.in);
+		double amount = input.nextInt();
+	}
+
+---------------example4---------------
+public static void main(String[] args) {		
+		Scanner input = new Scanner(System.in);	
+		custoHora = input.nextFloat();	
+		qtdHora = input.nextInt();
+	}
+
+---------------example5---------------
+public Activation<?> getNextActivation() {
+		if (activations.isEmpty()) return null;
+		if (activations.size() == 1) return activations.iterator().next();
+		int choice = new Scanner(System.in).nextInt();
+		return options.get(choice);	
+	}\n
+48   Scanner.nextLine
+---------------example1---------------
+public long getLineCount()
+	{
+		while (scanner.hasNextLine())
+		{
+			scanner.nextLine();
+		}
+		return count;
+	}
+
+---------------example2---------------
+private static String[] wordsFromScanner(Scanner scanner){
+        while (scanner.hasNextLine()){
+            String line = scanner.nextLine();
+            String[] words = line.split(\" \");
+        }
+        return Utils.<String>listToArrayStr(result);
+    }
+
+---------------example3---------------
+boolean copyUntilMethod() {
+		while(scanner.hasNextLine()) {
+			String line = scanner.nextLine();
+			if(METHOD_SIGNATURE_PATTERN.matcher(line).find())
+				return true;
+		}
+		return false;
+	}
+
+---------------example4---------------
+public void run() {
+        final Scanner in = Client.this.in;
+        while (in.hasNextLine()) { 
+            Debugger.me.in(Client.this, in.nextLine());
+        }
+    }
+
+---------------example5---------------
+private static MRoutineContent getInstance(String name, Scanner scanner) {
+		while (scanner.hasNextLine()) {
+			String line = scanner.nextLine();
+		}
+		return result;				
+	}
+
+49   Scanner.nextLine
+---------------example1---------------
+public long getLineCount()
+	{
+		while (scanner.hasNextLine())
+		{
+			scanner.nextLine();
+		}
+		return count;
+	}
+
+---------------example2---------------
+private static String[] wordsFromScanner(Scanner scanner){
+        while (scanner.hasNextLine()){
+            String line = scanner.nextLine();
+            String[] words = line.split(\" \");
+        }
+        return Utils.<String>listToArrayStr(result);
+    }
+
+---------------example3---------------
+boolean copyUntilMethod() {
+		while(scanner.hasNextLine()) {
+			String line = scanner.nextLine();
+			if(METHOD_SIGNATURE_PATTERN.matcher(line).find())
+				return true;
+		}
+		return false;
+	}
+
+---------------example4---------------
+public void run() {
+        final Scanner in = Client.this.in;
+        while (in.hasNextLine()) { 
+            Debugger.me.in(Client.this, in.nextLine());
+        }
+    }
+
+---------------example5---------------
+private static MRoutineContent getInstance(String name, Scanner scanner) {
+		while (scanner.hasNextLine()) {
+			String line = scanner.nextLine();
+		}
+		return result;				
+	}\n
+50   SharedPreferences.edit
+---------------example1---------------
+public boolean attemptPruneBySize(final long time) {
+    final boolean retval = policy.attemptPruneBySize(time);
+    sharedPrefs.edit().commit();
+    return retval;
+  }
+
+---------------example2---------------
+public boolean attemptExpiration(final long time) {
+    final boolean retval = policy.attemptExpiration(time);
+    sharedPrefs.edit().commit();
+    return retval;
+  }
+
+---------------example3---------------
+public boolean attemptStorageCleanup(final long time) {
+    final boolean retval = policy.attemptStorageCleanup(time);
+    sharedPrefs.edit().commit();
+    return retval;
+  }
+
+---------------example4---------------
+public synchronized void commitCatFilter( Context context ) {
+        if ( mCatFilterMask == mCatFilterMaskApplied )
+            return;
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putInt( PREFS_CATMASK, mCatFilterMask );
+        editor.commit();
+    }
+
+---------------example5---------------
+void saveWidget() {
+        SharedPreferences.Editor ed = preferences.edit();
+        ed.putString(Names.WIDGET + widgetID, car_id);
+        ed.commit();
+    }\n
+51   SimpleDateFormat.format
+---------------example1---------------
+public String getDateofCreation()
+  {
+      if (this.getCreationDate() != null)
+      {
+          return this.formatDate(this.getCreationDate());
+      }
+      else
+      {
+          return null;
+      }
+  }
+
+---------------example2---------------
+public String getEndDate(String format) {
+    SimpleDateFormat formatter = new SimpleDateFormat(format);
+    return formatter.format(this.end);
+  }
+
+---------------example3---------------
+private String getDate(){
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat(\"yyyy\'-\'MM\'-\'dd kk\':\'mm\':\'ss\");
+		return sdf.format(date);
+	}
+
+---------------example4---------------
+public String getTime() {
+        SimpleDateFormat formater = new SimpleDateFormat(\"hh:mm:ss\"); 
+        return formater.format(utc.getTime());
+    }
+
+---------------example5---------------
+private String millisecToString(long millisec) {
+		Date date = new Date(millisec);
+		String formattedDate = new SimpleDateFormat(\"mm:ss\").format(date);
+		return formattedDate;
+	}\n
+52   SimpleDateFormat.parse
+---------------example1---------------
+private static boolean isSQL(final String s) {
+        SimpleDateFormat dtf = new SimpleDateFormat(\"MM/dd/yyyy HH:mm:ss aaa\");
+        try {
+            dtf.parse(s);
+        } catch (ParseException e) {
+        }
+        return retVal;
+
+    }
+
+---------------example2---------------
+public Date getDateCreated() {
+		SimpleDateFormat format = new SimpleDateFormat(
+				\"EEE, dd MMM yyyy HH:mm:ss Z\");
+		try {
+			return format.parse(this.getProperty(\"date_created\"));
+		} catch (ParseException e) {
+			return null;
+		}
+	}
+
+---------------example3---------------
+public static Date parserStringToDate(String formato,String date){
+         SimpleDateFormat format = new SimpleDateFormat(formato);
+         format.setLenient(false);
+        try {
+            return format.parse(date);
+        } catch (ParseException ex) {
+            return null;
+        }
+    }
+
+---------------example4---------------
+public InvoiceTestBuilder withBondDate(String date) {
+        try {
+            invoice.setBondDate(new SimpleDateFormat(DATE_FORMAT).parse(date));
+        } catch (ParseException ignored) {
+        }
+        return this;
+    }
+
+---------------example5---------------
+public InvoiceTestBuilder withBillOfEntryDate(String date) {
+        try {
+            invoice.setBillOfEntryDate(new SimpleDateFormat(DATE_FORMAT).parse(date));
+        } catch (ParseException ignored) {
+        }
+        return this;
+    }
+
+53   SimpleDateFormat.SimpleDateFormat
+---------------example1---------------
+public String getDateofCreation()
+  {
+      if (this.getCreationDate() != null)
+      {
+          return this.formatDate(this.getCreationDate());
+      }
+      else
+      {
+          return null;
+      }
+  }
+
+---------------example2---------------
+public String getEndDate(String format) {
+    SimpleDateFormat formatter = new SimpleDateFormat(format);
+    return formatter.format(this.end);
+  }
+
+---------------example3---------------
+private String getDate(){
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat(\"yyyy\'-\'MM\'-\'dd kk\':\'mm\':\'ss\");
+		return sdf.format(date);
+	}
+
+---------------example4---------------
+public String getTime() {
+        SimpleDateFormat formater = new SimpleDateFormat(\"hh:mm:ss\"); 
+        return formater.format(utc.getTime());
+    }
+
+---------------example5---------------
+private String millisecToString(long millisec) {
+		Date date = new Date(millisec);
+		String formattedDate = new SimpleDateFormat(\"mm:ss\").format(date);
+		return formattedDate;
+	}
+
+54   SimpleDateFormat.SimpleDateFormat
+---------------example1---------------
+private static boolean isSQL(final String s) {
+        SimpleDateFormat dtf = new SimpleDateFormat(\"MM/dd/yyyy HH:mm:ss aaa\");
+        try {
+            dtf.parse(s);
+        } catch (ParseException e) {
+        }
+        return retVal;
+
+    }
+
+---------------example2---------------
+public Date getDateCreated() {
+		SimpleDateFormat format = new SimpleDateFormat(
+				\"EEE, dd MMM yyyy HH:mm:ss Z\");
+		try {
+			return format.parse(this.getProperty(\"date_created\"));
+		} catch (ParseException e) {
+			return null;
+		}
+	}
+
+---------------example3---------------
+public static Date parserStringToDate(String formato,String date){
+         SimpleDateFormat format = new SimpleDateFormat(formato);
+         format.setLenient(false);
+        try {
+            return format.parse(date);
+        } catch (ParseException ex) {
+            return null;
+        }
+    }
+
+---------------example4---------------
+public InvoiceTestBuilder withBondDate(String date) {
+        try {
+            invoice.setBondDate(new SimpleDateFormat(DATE_FORMAT).parse(date));
+        } catch (ParseException ignored) {
+        }
+        return this;
+    }
+
+---------------example5---------------
+public InvoiceTestBuilder withBillOfEntryDate(String date) {
+        try {
+            invoice.setBillOfEntryDate(new SimpleDateFormat(DATE_FORMAT).parse(date));
+        } catch (ParseException ignored) {
+        }
+        return this;
+    }\n
+55   SQLiteDatabase.query
+---------------example1---------------
+public boolean eventTableIsEmpty()
+	{
+		Cursor c = db.query(EVENT_TABLE, new String[] {KEY_EVENT_ID},
+				null, null, null, null, null);
+		int rows = c.getCount();
+		c.close();
+		return rows == 0;
+	}
+
+---------------example2---------------
+public boolean containsLocation(long locationID)
+	{
+		Cursor c = db.query(LOCATION_TABLE, new String[] {KEY_LOCATION_ID},
+			KEY_LOCATION_ID + \"=\" + locationID, null, null, null, null);
+		int rows = c.getCount();
+		c.close();
+		return rows != 0;
+	}
+
+---------------example3---------------
+public boolean containsEvent(long eventID)
+	{
+		Cursor c = db.query(EVENT_TABLE, new String[] {KEY_EVENT_ID},
+			KEY_EVENT_ID + \"=\" + eventID, null, null, null, null);
+		int rows = c.getCount();
+		c.close();
+		return rows != 0;
+	}
+
+---------------example4---------------
+public boolean containsSociety(long societyID)
+	{
+		Cursor c = db.query(SOCIETY_TABLE, new String[] {KEY_SOCIETY_ID},
+			KEY_SOCIETY_ID + \"=\" + societyID, null, null, null, null);
+		int rows = c.getCount();
+		c.close();
+		return rows != 0;
+	}
+
+---------------example5---------------
+public ResponseItem findPermissionById(int id) {
+		Cursor c = db.query(Constants.TABLE_PRIVACY_PERMISSION,
+				Constants.TABLE_PRIVACY_PERMISSION_FIELDS,
+				\" rowid=? \",
+				new String[] {id+\"\"}, null, null, null);
+		ResponseItem permission = cursorToPermission(c);
+		c.close();
+		return permission;
+	}
+
+56   StringBuilder.append
+---------------example1---------------
+private String toString(int n, FloatBuffer buf) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(\"{\n\");
+        for (int i = 0; i < n; i++) {
+            builder.append(\" [\" + i + \"] = \" + buf.get(i) + \'\n\');
+        }
+        builder.append(\"}\");
+        return builder.toString();
+    }
+
+---------------example2---------------
+private String toString(int n, int format, IntBuffer buf) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(\"{\n\");
+        for (int i = 0; i < n; i++) {
+            builder.append(\" [\" + i + \"] = \");
+            formattedAppend(builder, buf.get(i), format);
+            builder.append(\'\n\');
+        }
+        builder.append(\"}\");
+        return builder.toString();
+    }
+
+---------------example3---------------
+private String toString(int n, ShortBuffer buf) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(\"{\n\");
+        for (int i = 0; i < n; i++) {
+            builder.append(\" [\" + i + \"] = \" + buf.get(i) + \'\n\');
+        }
+        builder.append(\"}\");
+        return builder.toString();
+    }
+
+---------------example4---------------
+public String toString() {
+		StringBuilder result = new StringBuilder();
+		result.append(\"Current bet is \" + this.currentBet);
+		return result.toString();
+	}
+
+---------------example5---------------
+private StaticJavaResource makeClass(String className) {
+    StringBuilder code = new StringBuilder();
+    code.append(\"public class \" + className + \"{ }\n\");
+    StaticJavaResource e = new StaticJavaResource(className, code);
+    return e;
+  }\n
+57   Toast.makeText
+---------------example1---------------
+public static void showLongToast(Context context, String message) {
+		Toast toast = Toast.makeText(context, message,
+				Toast.LENGTH_LONG);
+		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.show();
+	}
+
+---------------example2---------------
+public static void showShortToast(Context context, String message) {
+		Toast toast = Toast.makeText(context, message,
+				Toast.LENGTH_SHORT);
+		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.show();
+	}
+
+---------------example3---------------
+public boolean onLongClick(View v) {
+        Toast.makeText(getContext(), \"Settings theme changed\", Toast.LENGTH_SHORT).show();
+        return true;
+    }
+
+---------------example4---------------
+public void deleteIngredient(View view) {
+		Toast.makeText(getApplicationContext(), \"Ingredient entry deleted!\",
+				Toast.LENGTH_SHORT).show();
+	}
+
+---------------example5---------------
+public void onCreate() {
+        Toast.makeText(this,
+                \"Service created as user \" + UserHandle.myUserId(),
+                Toast.LENGTH_LONG).show();
+    }
+
+58   TypedArray.getString
+---------------example1---------------
+LayoutParams(Context c, AttributeSet attrs) {
+            TypedArray a = c.obtainStyledAttributes(attrs, R.styleable.PullToRefreshView);
+            mViewDelegateClassName = a
+                    .getString(R.styleable.PullToRefreshView_ptrViewDelegateClass);
+            a.recycle();
+        }
+
+---------------example2---------------
+LayoutParams(Context c, AttributeSet attrs) {
+            TypedArray a = c.obtainStyledAttributes(attrs, R.styleable.PullToRefreshView);
+            mViewDelegateClassName = a
+                    .getString(R.styleable.PullToRefreshView_ptrViewDelegateClass);
+            a.recycle();
+        }
+
+---------------example3---------------
+public String getString(String attrName) {
+		TypedArray a = mContext.obtainStyledAttributes(mThemeId, attr);
+		String s = a.getString(0);
+		a.recycle();
+		return s;
+	}
+
+---------------example4---------------
+private void setCustomFont( Context ctx, AttributeSet attrs ) {
+		String font = array.getString( R.styleable.TextViewCustomFont_font );
+		array.recycle();
+	}
+
+---------------example5---------------
+public TheoryPlanetView(Context context, AttributeSet attrs) {
+		TypedArray a = context.obtainStyledAttributes(attrs,
+				R.styleable.TheoryPlanetView);
+		this.setAnchor(a.getString(R.styleable.TheoryPlanetView_anchor));
+		a.recycle();
+	}\n
+59   URL.openConnection
+---------------example1---------------
+public HttpConn(final String url) throws IOException {
+            con = (HttpURLConnection) new URL(url).openConnection();
+        }
+
+---------------example2---------------
+public String piloterCameraGauche() throws Exception {
+        URL u = new URL(\"http://\"+ip+\"/command/ptzf.cgi?Move=left,8\");
+        URLConnection connection = (URLConnection) u.openConnection();
+        return null;
+    }
+
+---------------example3---------------
+public String piloterCameraDroite() throws Exception {
+        URL u = new URL(\"http://\"+ip+\"/command/ptzf.cgi?Move=right,8\");
+        URLConnection connection = (URLConnection) u.openConnection();
+        return null;
+    }
+
+---------------example4---------------
+public String piloterCameraHaut() throws Exception {
+        URL u = new URL(\"http://\"+ip+\"/command/ptzf.cgi?Move=up,8\");
+        URLConnection connection = (URLConnection) u.openConnection();
+        return null;
+    }
+
+---------------example5---------------
+public String piloterCameraBas() throws Exception {
+        URL u = new URL(\"http://\"+ip+\"/command/ptzf.cgi?Move=down,8\");
+        URLConnection connection = (URLConnection) u.openConnection();
+        return null;
+    }
+
+60   URL.openConnection
+---------------example1---------------
+public List<Node> refreshActiveNodes() throws IOException,
+			ConfigurationException {
+		URLConnection conn = url.openConnection();
+		InputStream in = conn.getInputStream();
+	}
+
+---------------example2---------------
+public static byte[] getImage(URL url) throws Exception {
+		URLConnection connection = url.openConnection();
+		InputStream stream = connection.getInputStream();
+		return image;
+	}
+
+---------------example3---------------
+public UncachedUrlStream(URL source) throws OggFormatException, IOException {
+        this.source = source.openConnection();
+        this.sourceStream = this.source.getInputStream();
+    }
+
+---------------example4---------------
+public InputStream getImageStream(URL stringUrl) {
+		InputStream input = null;
+		try {
+			input = stringUrl.openConnection().getInputStream();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return input;
+	}
+
+---------------example5---------------
+public InputStream retrieve(String zipcode) throws Exception {
+		URLConnection conn = new URL(url).openConnection();
+		return conn.getInputStream();
+	}\n
+61   null.Environment.getExternalStorageState
+---------------example1---------------
+try {
+            state = Environment.getExternalStorageState();
+        } catch (NullPointerException e) {
+            state = \"\";
+        }
+---------------example2---------------
+try {
+            str = Environment.getExternalStorageState();
+        } catch (IncompatibleClassChangeError | NullPointerException unused) {
+        }
+---------------example3---------------
+try
+        {
+            obj = Environment.getExternalStorageState();
+        }
+        catch (NullPointerException nullpointerexception)
+        {
+            obj = \"\";
+        }
+---------------example4---------------
+try {
+            externalStorageState = Environment.getExternalStorageState();
+        } catch (NullPointerException e) { // (sh)it happens (Issue #660)
+            externalStorageState = \"\";
+        }
+---------------example5---------------
+try {
+            externalStorageState = Environment.getExternalStorageState();
+        } catch (NullPointerException e) { // (sh)it happens (Issue #660)
+            externalStorageState = \"\";
+        }
+62   java.awt.Toolkit.getAWTEventListeners
+---------------example1---------------
+for (AWTEventListener l: toolkit.getAWTEventListeners()){
+            Sysout.println(\"Test: listener = \" +l+\" \");
+        }
+        if ( toolkit.getAWTEventListeners().length == 0 ) {
+            throw new RuntimeException(\"Case 1. An empty array returned unexpectedly\");
+        }
+---------------example2---------------
+for (AWTEventListener listener : toolkit.getAWTEventListeners()) {
+            if (listener instanceof AWTEventListenerProxy) {
+                listener = ((AWTEventListenerProxy)listener).getListener();
+
+            }
+            if (\"LayerEventController\".equals(listener.getClass().getSimpleName())) {
+                if (layerEventController != null) {
+                    throw new RuntimeException(\"Duplicated LayerEventController\");
+                }
+                layerEventController = listener;
+            }
+        }
+---------------example3---------------
+public AWTEventListener[] getAWTEventListeners() {
+        return tk.getAWTEventListeners();
+    }
+
+    public AWTEventListener[] getAWTEventListeners(long eventMask) {
+        return tk.getAWTEventListeners(eventMask);
+    }
+---------------example4---------------
+this.awtEventListener = (AWTEvent event) -> {
+            List<AWTEventListener> eventListeners = SubstanceCoreUtilities.getAwtEventListeners();
+            for (int i = eventListeners.size() - 1; i >= 0; i--) {
+                eventListeners.get(i).eventDispatched(event);
+            }
+        };
+---------------example5---------------
+for (AWTEventListener l : Toolkit.getDefaultToolkit().getAWTEventListeners()) {
+			if (l == listener) {
+				listenersToRemove.add(l);
+			} else if (l instanceof AWTEventListenerProxy) {
+				final AWTEventListenerProxy proxyListener = (AWTEventListenerProxy) l;
+			}
+		}
+63   java.net.URLConnection.getHeaderField
+---------------example1---------------
+xsamsQueryHeadResponse.setCountRadiative(http.getHeaderField(\"VAMDC-COUNT-RADIATIVE\"));
+            xsamsQueryHeadResponse.setCountStates(http.getHeaderField(\"VAMDC-COUNT-STATES\"));
+            xsamsQueryHeadResponse.setCountSpecies(http.getHeaderField(\"VAMDC-COUNT-SPECIES\"));
+            xsamsQueryHeadResponse.setCountAtoms(http.getHeaderField(\"VAMDC-COUNT-ATOMS\"));
+            xsamsQueryHeadResponse.setCountMolecules(http.getHeaderField(\"VAMDC-COUNT-MOLECULES\"));
+            xsamsQueryHeadResponse.setCountSources(http.getHeaderField(\"VAMDC-COUNT-SOURCES\"));
+            xsamsQueryHeadResponse.setCountCollisions(http.getHeaderField(\"VAMDC-COUNT-COLLISIONS\"));
+            xsamsQueryHeadResponse.setCountNonRadiative(http.getHeaderField(\"VAMDC-COUNT-NONRADIATIVE\"));
+---------------example2---------------
+public static LeaseDuration getLeaseDuration(final HttpURLConnection request) {
+        final String leaseDuration = request.getHeaderField(Constants.HeaderConstants.LEASE_DURATION);
+        if (!Utility.isNullOrEmpty(leaseDuration)) {
+            return LeaseDuration.parse(leaseDuration);
+        }
+
+        return LeaseDuration.UNSPECIFIED;
+    }
+---------------example3---------------
+public String getServiceMessage()
+  {
+    return conn.getHeaderField(\"service_message\");
+  }
+  public String getHeaderField(String headerField)
+  {
+    return conn.getHeaderField(headerField);
+  }
+---------------example4---------------
+public void testHeaderFunctions() throws IOException {
+        assertEquals(conn.getContentType(),  conn.getHeaderField(\"content-type\")) ;
+        assertEquals(conn.getContentType(),  conn.getHeaderField(\"content-type\")) ;
+        assertEquals(Integer.toString(conn.getContentLength()),  conn.getHeaderField(\"content-length\")) ;
+        assertEquals(conn.getHeaderField(0), conn.getHeaderField(\"content-type\"));
+        assertEquals(conn.getHeaderField(1), conn.getHeaderField(\"content-length\"));
+        assertEquals(conn.getHeaderField(2), conn.getHeaderField(\"last-modified\"));
+    }
+---------------example5---------------
+private static void test_GET_png() throws Exception {
+		assert response.getHeaderField(\"X-PlantUML-Diagram-Error\") == null;
+		assert response.getHeaderField(\"X-PlantUML-Diagram-Error-Line\") == null;
+		assert response.getHeaderField(\"X-PlantUML-Diagram-Error\") == null;
+		assert response.getHeaderField(\"X-PlantUML-Diagram-Error-Line\") == null;
+		assert response.getHeaderField(\"X-PlantUML-Diagram-Error\").equals(\"Syntax Error?\");
+		assert response.getHeaderField(\"X-PlantUML-Diagram-Error-Line\").equals(\"2\");
+	}
+64   javax.sound.midi.Sequencer.SyncMode.
+---------------example1---------------
+public synchronized void setSyncMode(SyncMode mode) {
+        if(System.currentTimeMillis() - lastModeChangeTime >  Constants.RETARDEDNESS){
+        this.syncMode = mode;
+        }
+    }
+---------------example2---------------
+public synchronized double getSpeedA() {
+        if (type == SyncMode.MOTORS) {
+            double temp = encoderA.getValue();
+            long tempTime = System.currentTimeMillis();
+            double res = (temp - oldEncoderA) * 1000 / ((tempTime - oldTimeA) == 0 ? 1 : (tempTime - oldTimeA));
+            oldTimeA = tempTime;
+            oldEncoderA = temp;
+            return res;
+        }
+        return masterB.getSpeedA();
+    }
+---------------example3---------------
+public synchronized void zeroEncoders() {
+        if (type == SyncMode.MOTORS) {
+        } else {
+        }
+    }
+---------------example4---------------
+public synchronized void move() {
+        double adjust = 0;
+        if (!first0 || !second0) {
+            if (algo == SyncAlgo.SPEED) {
+            } else {
+                adjust = type == SyncMode.MOTORS ? pid.getPIDOutput(encoderA.getValue()*ratio - encoderB.getValue()) : pid.getPIDOutput(masterB.getEncoder().getValue()*ratio - slaveB.getEncoder().getValue());
+            }
+        }
+        if (type == SyncMode.MOTORS) {
+        }else {
+        }
+    }
+---------------example5---------------
+public synchronized CMD getSyncMode() {
+		return syncMode;
+	}
+	public synchronized void setSyncMode(CMD cmd) {
+		syncMode = cmd;
+	}
+65   javax.swing.table.DefaultTableModel.insertRow
+---------------example1---------------
+try
+    {
+      m1.insertRow(-1, (Object[]) null);
+    }
+    catch (ArrayIndexOutOfBoundsException e) 
+    {
+      pass = true;
+    }
+---------------example2---------------
+try {
+            noInitialCrset.insertRow();
+        } catch (SQLException e) {
+        }
+---------------example3---------------
+try
+		{
+			grid.insertRow(rowValida, 50);
+		}
+		catch (ArrayIndexOutOfBoundsException expected)
+		{
+		}
+---------------example4---------------
+try
+		{
+			grid.insertRow(rowValida, -1);
+		}
+		catch (ArrayIndexOutOfBoundsException expected)
+		{
+		}
+---------------example5---------------
+try
+    {
+      m1.insertRow(999, (Vector) null);
+    }
+    catch (ArrayIndexOutOfBoundsException e) 
+    {
+    }
+66   java.util.Map
+---------------example1---------------
+private final Map/*<K,ReentrantLock>*/ locks;
+public void writeLock(final Object key) {
+        ReentrantLock lock;
+        synchronized (locks) {
+            lock = (ReentrantLock) locks.get(key);
+            if (lock == null) {
+                lock = new ReentrantLock();
+                locks.put(key, lock);
+            }
+        }
+        lock.lock();        
+    }
+---------------example2---------------
+private final Map<K,Object> hash = new HashMap<K,Object>();
+public int size() {
+        synchronized (hash) {
+            return hash.size();
+        }
+    }
+---------------example3---------------
+private final Map/*<K,ReentrantLock>*/ locks;
+public void writeUnLock(final Object key) {
+        synchronized (locks) {
+            final ReentrantLock lock = (ReentrantLock) locks.get(key);
+            if (lock == null) {
+                throw new IllegalMonitorStateException(\"Cannot unlock prior to locking\");
+            }
+            if( lock.getHoldCount() == 0 ){
+                throw new IllegalMonitorStateException(\"Cannot unlock prior to locking\");
+            }
+            lock.unlock();
+            if (lock.getHoldCount() == 0) {
+                locks.remove(key);
+            }
+        }
+    }
+---------------example4---------------
+private final Map/*<K,ReentrantLock>*/ locks;
+boolean holdsLock(final Object key) {
+        synchronized (locks) {
+            final ReentrantLock lock = (ReentrantLock) locks.get(key);
+            if (lock != null) {
+                return lock.getHoldCount() != 0;
+            }
+        }
+        return false;
+    }
+---------------example5---------------
+private final Map/*<K,ReentrantLock>*/ locks;
+public void remove(Object key){
+    	synchronized (locks) {
+    		locks.remove(key);
+		}
+    }
